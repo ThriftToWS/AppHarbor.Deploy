@@ -1,0 +1,54 @@
+<div ng-init="ctr.load()">
+    <div>
+        <h3 ng-show="ctr.model.id">Organization</h3>
+        <h3 ng-hide="ctr.model.id">New Organization</h3>
+        <form name="form" role="form" ng-submit="ctr.save()">
+            <div>
+                <div class="form-group">
+                    <label for="code">Code</label>
+                    <input type="text" id="code" name="code" class="form-control" ng-model="ctr.model.code" ng-disabled="!ctr.isNewOrEdit()" maxlength="20" required />
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" ng-model="ctr.model.name" ng-disabled="!ctr.isNewOrEdit()" maxlength="100" required />
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" ng-show="ctr.isNewOrEdit()">Save</button>
+                <button type="button" class="btn btn-primary" ng-hide="ctr.isNewOrEdit()" ng-click="ctr.edit()">Edit</button>
+                <button type="button" class="btn btn-primary" ng-click="redirectOrganizationIndex()">Back</button>
+            </div>
+        </form>
+        <br />
+        <div ng-hide="ctr.isNew()">
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-title">
+                    Server Services
+                    <button type="button" class="btn btn-sm btn-default pull-right" ng-click="redirectServerServiceNew(ctr.model.id)">New</button>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <a ng-href="#/organization/{{ctr.model.id}}/serverService/{{service.id}}" class="list-group-item" ng-repeat="service in ctr.model.serverServices">
+                            <h4 class="list-group-item-heading">{{service.code}}</h4>
+                            <label class="list-group-item-text">{{service.name}}</label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading panel-title">
+                    Client Services
+                    <button type="button" class="btn btn-sm btn-default pull-right" ng-click="redirectClientServiceJoin(ctr.model.id)">Join</button>
+                </div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <a ng-href="#/organization/{{ctr.model.id}}/clientService/{{clientService.service.id}}" class="list-group-item" ng-repeat="clientService in ctr.model.clientServices">
+                            <h4 class="list-group-item-heading">{{clientService.service.code}}</h4>
+                            <label class="list-group-item-text">{{clientService.service.name}}</label>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

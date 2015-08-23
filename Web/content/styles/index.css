@@ -1,0 +1,13 @@
+textarea {
+    resize: vertical;
+    min-height: 200px;
+}
+
+.border-solid {
+    border: solid;
+}
+
+.width-unset {
+    width: unset !important;
+}
+
